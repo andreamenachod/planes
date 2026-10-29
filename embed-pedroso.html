@@ -485,6 +485,7 @@ html[data-embed] .rc{border-radius:6px;margin-inline:max(16px,env(safe-area-inse
 @media (min-width:1312px){html[data-embed] .rc{margin-inline:auto}}
 html[data-embed] .rc-inner{padding-inline:clamp(24px,6vw,96px)}
 html[data-embed] .rutas .eyebrow{display:none}
+html[data-embed] .sec-head h2,html[data-embed] .rutas-title,html[data-embed] .rc-title,html[data-embed] .rc-ficha-head h3{font-size:clamp(2.2rem,4vw,3.6rem)!important;line-height:1.04}
 @media (min-width:1000px){html[data-embed] .rc-stats{flex-wrap:nowrap}html[data-embed] .rc-stats div{padding:2px 12px}html[data-embed] .rc-stats b{font-size:1.15rem}html[data-embed] .rc-stats small{font-size:.58rem;letter-spacing:.12em}}
 html[data-embed] .rutas-title{margin-top:0}
 html[data-embed] .rc-ficha{background:#F7F5EF;color:var(--kp-ink);border-top:0;max-width:1280px;margin:0 auto;border-radius:0 0 6px 6px}
@@ -1696,7 +1697,7 @@ var DESTINOS = [
   if(EMBED){
     var pt=document.getElementById('pueblos-title'); if(pt) pt.textContent='Pueblos';
     var post=function(m){ try{ window.parent.postMessage(m,'*'); }catch(e){} };
-    var sendH=function(){ post({type:'kampaoh-planes-height', h:Math.ceil(document.documentElement.scrollHeight)}); };
+    var sendH=function(){ var v=document.getElementById('view-'+EMBED); var h=v ? v.getBoundingClientRect().bottom+window.scrollY : document.body.scrollHeight; post({type:'kampaoh-planes-height', h:Math.ceil(h)}); };
     if('ResizeObserver' in window) new ResizeObserver(sendH).observe(document.body);
     window.addEventListener('load',sendH); setInterval(sendH,1500);
     /* dentro del iframe no hay scroll propio: se pide a la página de WordPress que baje hasta el elemento */
